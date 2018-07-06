@@ -1,7 +1,8 @@
 library(data.table)
 
-d <- fread("Shark_Attack_Data.csv")
+d <- fread("Shark_Attack_Data.csv", stringsAsFactors = TRUE)
 
+summary(d)
 dim(d)
 
 View(d)
