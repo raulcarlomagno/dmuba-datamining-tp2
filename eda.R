@@ -49,7 +49,7 @@ ggplot(d, aes(x=Fatal))+
 
 
 
-varSet1 <- c("Type", "Sex", "Fatal")
+varSet1 <- c("Type", "Sex", "Fatal", "Country")
 dFrame1 <- subset(d, select = varSet1)
 GKmatrix1 <- GKtauDataframe(dFrame1)
 plot(GKmatrix1)
