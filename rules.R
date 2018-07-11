@@ -31,9 +31,22 @@ plot(reglas)
 dev.off()
 
 
-reglasfatales <- apriori(trans, parameter = list(support=0.01, confidence=0.1, minlen = 2), appearance = list(rhs="Fatal=Y"))
+reglasfatales <- apriori(trans, parameter = list(support=0.005, confidence=0.01, minlen = 2), appearance = list(rhs="Age=niño"))
 inspect(head(sort(reglasfatales, by="lift", decreasing = TRUE),100))
 plot(head(sort(reglasfatales, by = "lift"), n=15), method = "graph", control=list(cex=.75))
+
+
+reglastercedad <- apriori(trans, parameter = list(support=0.008, confidence=0.008, minlen = 2), appearance = list(rhs="Type=Provoked")) 
+inspect(head(sort(reglastercedad, by="lift", decreasing = TRUE),100))
+plot(head(sort(reglastercedad, by = "lift"), n=15), method = "graph", control=list(cex=.75))
+
+
+reglastercedad <- apriori(trans, parameter = list(support=0.009, maxlen=4, minlen = 1))
+subreglastercedad <- subset(reglastercedad, subset = !items %in% "Country=USA" & !items %in% "Country=AUSTRALIA" & !items %in% "Country=SOUTH AFRICA")
+inspect(head(sort(subreglastercedad, by="lift", decreasing = TRUE),100))
+plot(head(sort(subreglastercedad, by = "lift"), n=15), method = "graph", control=list(cex=.75))
+plot(subreglastercedad)
+
 
 
 
