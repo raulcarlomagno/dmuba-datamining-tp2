@@ -12,7 +12,29 @@ summary(trans)
 dim(data)
 dim(trans)
 itemLabels(trans)
-itemFrequencyPlot(trans, topN=25)
+itemFrequencyPlot(trans, topN=25, cex.names=.75)
+
+#Error in plot.new() : figure margins too large
+#par("mar")
+#par(mar=c(1,1,1,1))
+
+
+
+reglas <- apriori(trans, parameter = list(support=0.1, confidence = 0.75))
+inspect(head(sort(reglas, by="lift", decreasing = TRUE),50))
+
+
+reglas <- apriori(trans, parameter = list(support=0.002, maxlen=4, minlen = 2))
+inspect(head(sort(reglas, by="lift", decreasing = TRUE),200))
+print(reglas)
+plot(reglas)
+dev.off()
+
+
+reglasfatales <- apriori(trans, parameter = list(support=0.01, confidence=0.1, minlen = 2), appearance = list(rhs="Fatal=Y"))
+inspect(head(sort(reglasfatales, by="lift", decreasing = TRUE),100))
+plot(head(sort(reglasfatales, by = "lift"), n=15), method = "graph", control=list(cex=.75))
+
 
 
 trans_female <- subset(trans, items %in% "Sex=F" & !items %in% "Country=USA" & !items %in% "Age=unknown")

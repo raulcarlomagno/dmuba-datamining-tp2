@@ -33,7 +33,7 @@ ggplot(d, aes(x=Type))+
   theme_minimal()
 
 table(d$Sex)
-d[d$Sex != "M" & d$Sex != "F", "Sex"] <- "Unknown"
+d[d$Sex != "M" & d$Sex != "F", "Sex"] <- NA
 ggplot(d, aes(x=Sex))+
   geom_bar() +
   theme_minimal()
@@ -42,7 +42,8 @@ d$Fatal <- d$`Fatal (Y/N)`
 d$`Fatal (Y/N)` <- NULL
 table(d$Fatal)
 d[d$Fatal == "F", "Fatal"] <- "Y"
-d[d$Fatal == "", "Fatal"] <- "UNKNOWN"
+d[d$Fatal == "", "Fatal"] <- NA
+d[d$Fatal == "UNKNOWN", "Fatal"] <- NA
 ggplot(d, aes(x=Fatal))+
   geom_bar() +
   theme_minimal()

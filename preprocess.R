@@ -78,7 +78,7 @@ d$age3 <- discretize(d$age2, method = "fixed", breaks = c(-Inf, 12, 18, 25, 40, 
 ggplot(d) + aes(x = age3) + geom_bar()
 levels(d$age3) <- c("niño", "adolescente", "joven", "adulto", "mediana edad", "tercera edad")
 ggplot(d) + aes(x = age3) + geom_bar()
-
+ggplot(d) + aes(x = Age) + geom_bar() + theme(axis.text.x = element_text(angle = 90, hjust = 1))
 d$Age <- d$age3
 d$age3 <- NULL
 d$age2 <- NULL
@@ -127,6 +127,8 @@ species <- c("white", "tiger", "bull", "blacktip", "bronze_whaler", "blacktip", 
 fixBronze <- str_replace_all(d$shark, "bronze whaler", "bronze_whaler")  
 
 d$specie <- species[match(strsplit(fixBronze,' '),species)]
+ggplot(d[!is.na(specie)]) + aes(x = specie) + geom_bar() + theme(axis.text.x = element_text(angle = 90, hjust = 1))
+sum(is.na(d$specie))/nrow(d)
 #View(d)
 #table(d$specie)
 
